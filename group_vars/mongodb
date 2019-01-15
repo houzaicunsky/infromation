@@ -1,0 +1,4 @@
+#------>mongodbrs1初始化<---------
+MongodbHosts1: "192.168.128.221"
+MongodbHosts2: "192.168.128.222"
+MongodbHosts3: "192.168.128.223"

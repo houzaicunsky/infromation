@@ -1,0 +1,3 @@
+NodeId: 223
+RedisRole: slave
+MongodbRole: arbiter

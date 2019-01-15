@@ -1,0 +1,6 @@
+sleep 5s
+mongo admin --eval  " rs.initiate({ _id:'rs1', members:[ {_id:0,host:'{{ MongodbHosts1 }}:27017',priority:2}, {_id:1,host:'{{ MongodbHosts2 }}:27027',priority:1},{_id:2,host:'{{ MongodbHosts3 }}:27037',arbiterOnly:true}] })"
+sleep 20s
+mongo admin --eval "db.createUser({ user: '{{ mongo_user }}', pwd: '{{ mongo_user }}', roles: [ { role: 'root', db: 'admin' } ] })"
+
+

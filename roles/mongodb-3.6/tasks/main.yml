@@ -1,0 +1,25 @@
+- name: 创建docker挂载的目录
+  shell: mkdir -p {{ item }}
+  with_items:
+  - /data/work/mgconf
+
+- name: 拷贝mongo的docker-compose文件
+  copy: src=docker-mongodb-compose.yml dest=/data/icsoc
+
+- name: 拷贝mongodb的配置文件
+  copy: src=mongodb.conf dest=/data/work/mgconf mode=0666
+
+- name: 拷贝mongodb auth的配置文件
+  copy: src=keyfile dest=/data/work/mgconf mode=0600  owner=polkitd 
+
+- name: 拷贝初始化脚本
+  template: src=init.sh.j2 dest=/data/work/mgconf/init.sh
+
+- name: 启动mongodbrole
+  shell: docker-compose -f /data/icsoc/docker-mongodb-compose.yml  up -d  {{ MongodbRole }}
+
+- name: 初始化mongodb和建立用户
+  shell: docker exec -it mongo-master /bin/sh /etc/mongodb/init.sh
+  when: ansible_default_ipv4.address ==  MongodbHosts1
+  tags: moninit
+

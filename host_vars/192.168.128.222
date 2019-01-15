@@ -1,0 +1,3 @@
+NodeId: 222
+RedisRole: slave
+MongodbRole: slave

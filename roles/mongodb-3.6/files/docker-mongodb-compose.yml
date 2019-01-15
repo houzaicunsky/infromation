@@ -1,0 +1,29 @@
+version: '3'
+services:
+  master:
+    image: mongo:3.6
+    container_name: mongo-master
+    ports:
+      - "27017:27017" 
+    volumes:
+      - /data/work/mongo1:/data/db
+      - /data/work/mgconf/:/etc/mongodb
+    command: mongod -f  /etc/mongodb/mongodb.conf
+  slave:
+    image: mongo:3.6
+    container_name: mongo-slave
+    ports:
+      - "27027:27017" 
+    volumes:
+      - /data/work/mongo2:/data/db
+      - /data/work/mgconf/:/etc/mongodb
+    command: mongod -f  /etc/mongodb/mongodb.conf
+  arbiter:
+    image: mongo:3.6
+    container_name: mongo-arbiter
+    ports:
+      - "27037:27017" 
+    volumes:
+      - /data/work/mongo3:/data/db
+      - /data/work/mgconf/:/etc/mongodb
+    command: mongod -f  /etc/mongodb/mongodb.conf

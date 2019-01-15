@@ -1,0 +1,16 @@
+[base]
+192.168.128.75 ansible_ssh_pass=wintel
+
+[asterisk:children]
+base
+
+[wintelastproxy:children]
+base
+
+[wintel:children]
+base
+
+[kamailio:children]
+base
+[db:children]
+base
